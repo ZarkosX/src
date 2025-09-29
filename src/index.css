@@ -1,42 +1,63 @@
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
-*/
+/* Minecraft-inspired Design System - Arabic */
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    /* Minecraft Color Palette */
+    --background: 220 15% 8%;
+    --foreground: 0 0% 95%;
 
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card: 220 15% 12%;
+    --card-foreground: 0 0% 95%;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover: 220 15% 12%;
+    --popover-foreground: 0 0% 95%;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    /* Minecraft Green */
+    --primary: 120 65% 45%;
+    --primary-foreground: 0 0% 100%;
+    --primary-glow: 120 65% 55%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    /* Stone Gray */
+    --secondary: 220 10% 25%;
+    --secondary-foreground: 0 0% 95%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    /* Dirt Brown */
+    --muted: 30 25% 20%;
+    --muted-foreground: 30 10% 70%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    /* Diamond Blue */
+    --accent: 200 90% 55%;
+    --accent-foreground: 0 0% 100%;
 
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive: 0 75% 60%;
+    --destructive-foreground: 0 0% 100%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    --border: 220 15% 20%;
+    --input: 220 15% 15%;
+    --ring: 120 65% 45%;
 
-    --radius: 0.5rem;
+    --radius: 0.75rem;
+
+    /* Minecraft Gradients */
+    --gradient-minecraft: linear-gradient(135deg, hsl(120 65% 45%), hsl(120 65% 35%));
+    --gradient-stone: linear-gradient(135deg, hsl(220 10% 25%), hsl(220 10% 15%));
+    --gradient-diamond: linear-gradient(135deg, hsl(200 90% 55%), hsl(200 90% 45%));
+    --gradient-gold: linear-gradient(135deg, hsl(45 100% 55%), hsl(45 100% 45%));
+    
+    /* Shadows */
+    --shadow-minecraft: 0 10px 30px -10px hsl(120 65% 45% / 0.4);
+    --shadow-stone: 0 5px 20px -5px hsl(220 10% 10% / 0.8);
+    --shadow-glow: 0 0 40px hsl(120 65% 45% / 0.3);
+
+    /* Transitions */
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-bounce: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
 
     --sidebar-background: 0 0% 98%;
 
@@ -100,6 +121,53 @@ All colors MUST be HSL.
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-cairo;
+    font-family: 'Cairo', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+
+  html {
+    direction: rtl;
+  }
+}
+
+@layer components {
+  .minecraft-card {
+    @apply bg-card border border-border rounded-lg shadow-[var(--shadow-stone)] 
+           hover:shadow-[var(--shadow-minecraft)] transition-[var(--transition-smooth)]
+           backdrop-blur-sm;
+  }
+
+  .minecraft-button {
+    @apply bg-[var(--gradient-minecraft)] text-primary-foreground px-6 py-3 rounded-lg
+           font-semibold shadow-[var(--shadow-minecraft)] hover:shadow-[var(--shadow-glow)]
+           transition-[var(--transition-bounce)] hover:scale-105 active:scale-95;
+  }
+
+  .diamond-button {
+    @apply bg-[var(--gradient-diamond)] text-accent-foreground px-6 py-3 rounded-lg
+           font-semibold shadow-lg hover:shadow-xl transition-[var(--transition-bounce)]
+           hover:scale-105 active:scale-95;
+  }
+
+  .gold-button {
+    @apply bg-[var(--gradient-gold)] text-black px-6 py-3 rounded-lg
+           font-semibold shadow-lg hover:shadow-xl transition-[var(--transition-bounce)]
+           hover:scale-105 active:scale-95;
+  }
+
+  .minecraft-input {
+    @apply bg-input border border-border rounded-lg px-4 py-3 text-foreground
+           focus:ring-2 focus:ring-primary focus:border-transparent
+           transition-[var(--transition-smooth)] placeholder:text-muted-foreground;
+  }
+
+  .glow-text {
+    text-shadow: 0 0 20px hsl(var(--primary-glow));
+  }
+
+  .pixelated {
+    image-rendering: pixelated;
+    image-rendering: -moz-crisp-edges;
+    image-rendering: crisp-edges;
   }
 }
