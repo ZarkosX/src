@@ -10,8 +10,9 @@ import { Settings, Bot, MessageSquare, Save, Eye, EyeOff, Copy, Check } from 'lu
 
 export const AdminSettings = () => {
   const [settings, setSettings] = useState({
-    botToken: '',
-    clientId: '',
+    botToken: 'MTQyMjE0MzI1MDA1OTM2MjMxNQ.GTnhgQ.6v3WFCAUk__Nxy20hjZDdzQ2_mGlJRhBUh8KhI',
+    clientId: '1422143250059362315',
+    clientSecret: 'd_Yv99NGshnsC_PaOE7wTXNRyTwYJ6I-',
     channelId: '',
     guildId: ''
   });
@@ -143,6 +144,29 @@ export const AdminSettings = () => {
                   disabled={!settings.clientId}
                 >
                   {copied === 'Client ID' ? <Check className="h-4 w-4 text-primary" /> : <Copy className="h-4 w-4" />}
+                </Button>
+               </div>
+            </div>
+
+            <div className="space-y-2">
+              <Label htmlFor="clientSecret">Client Secret</Label>
+              <div className="flex gap-2">
+                <Input
+                  id="clientSecret"
+                  type={showToken ? "text" : "password"}
+                  value={settings.clientSecret}
+                  onChange={(e) => setSettings({...settings, clientSecret: e.target.value})}
+                  placeholder="d_Yv99NGshnsC_PaOE7wTXNRyTwYJ6I-"
+                  className="minecraft-input flex-1"
+                />
+                <Button
+                  type="button"
+                  variant="outline"
+                  size="icon"
+                  onClick={() => copyToClipboard(settings.clientSecret, 'Client Secret')}
+                  disabled={!settings.clientSecret}
+                >
+                  {copied === 'Client Secret' ? <Check className="h-4 w-4 text-primary" /> : <Copy className="h-4 w-4" />}
                 </Button>
               </div>
             </div>
